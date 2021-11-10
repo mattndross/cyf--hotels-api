@@ -49,7 +49,39 @@
             "name": "hotel",
             "description": "get all the hotels with this id",
             "schema": {
-              "type": "integer"
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/customers/":{
+      "get":{
+        "tags":["Customers"],
+        "summary":"Get all customers",
+        "responses": {
+          "200":{
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/customers/{customerId}": {
+      "get": {
+        "tags": ["Customers"],
+        "summary": "Get all customers",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customer id",
+            "description": "get customers by id",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -88,7 +120,7 @@
     },
     "/customers": {
       "post": {
-        "tags": ["Hoteles"],
+        "tags": ["Customers"],
         "summary": "Add a customer",
         "description": "",
         "operationId": "addPet",

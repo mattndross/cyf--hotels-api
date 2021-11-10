@@ -47,7 +47,7 @@ app.get("/hotels", function (req, res)
 		.catch((e) => console.error(e));
 });
 
-app.get("/hotels2/:hotelId", (req, res) => {
+app.get("/hotels/:hotelId", (req, res) => {
 	const hotelId = req.params.hotelId;
 	
 	pool
@@ -55,6 +55,28 @@ app.get("/hotels2/:hotelId", (req, res) => {
 	.then((result)=> res.json(result.rows))
 	.catch((e)=> console.log(e))
 })
+
+app.get("/customers", (req, res) => {
+	pool
+	.query("SELECT * FROM customers ORDER BY name")
+	.then((result)=> res.json(result.rows))
+	.catch((e)=> console.log(e));
+});
+
+app.get("/customers/:customerId", (req, res) => {
+	const customerId = req.params.customerId;
+	pool
+	.query("SELECT * FROM customers WHERE id = $1", [customerId])
+	.then((result) => res.json(result.rows))
+	.catch(e=>console.log(e))
+});
+app.get("/customers/:customerId/bookings", (req, res) => {
+	const customerId = req.params.customerId;
+	pool
+	.query("SELECT * FROM customers c JOIN bookings b on c.id = b.customer_id WHERE c.id = $1", [customerId])
+	.then((result) => res.json(result.rows))
+	.catch(e=>console.log(e))
+});
 
 app.post("/hotels", function (req, res)
 {
