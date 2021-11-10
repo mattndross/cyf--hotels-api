@@ -1,0 +1,166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My hotels application",
+    "description": "My hotels application",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Hoteles",
+      "description": "API for our hotels application"
+    }
+  ],
+  "paths": {
+    "/hotels/": {
+      "get": {
+        "tags": ["Hoteles"],
+        "summary": "Get all hotels",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "hotel",
+            "description": "get al the hotels with this name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/hotels/{hotelId}": {
+      "get": {
+        "tags": ["Hoteles"],
+        "summary": "Get all hotels",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hotel",
+            "description": "get all the hotels with this id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/hotels": {
+      "post": {
+        "tags": ["Hoteles"],
+        "summary": "Añade un hotel",
+        "description": "",
+        "operationId": "addPet",
+        "consumes": ["application/json", "application/xml"],
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewHotel"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "tags": ["Hoteles"],
+        "summary": "Add a customer",
+        "description": "",
+        "operationId": "addPet",
+        "consumes": ["application/json", "application/xml"],
+        "produces": ["application/json", "application/xml"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewCustomer"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NewHotel": {
+      "type": "object",
+      "required": ["name", "rooms", "postcode"],
+      "properties": {
+        "postcode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rooms": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "NewHotel"
+      }
+    },
+    "NewCustomer": {
+      "type": "object",
+      "required": ["name", "address", "email", "city", "country", "postcode"],
+      "properties": {
+        "postcode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "NewCustomer"
+      }
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"]
+}
